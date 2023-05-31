@@ -1,6 +1,6 @@
 import { serve } from "https://deno.land/std@0.188.0/http/server.ts"
 import { serveDir } from "https://deno.land/std@0.188.0/http/file_server.ts"
-import { h, Component } from 'https://esm.sh/preact'
+import { h } from 'https://esm.sh/preact'
 import { render } from 'https://esm.sh/preact-render-to-string'
 
 const bio = `
@@ -10,8 +10,6 @@ Hi, I'm Everett Bogue.  I've been coding JavaScript since 1999.
 serve((req) => {
   const url = new URL(req.url)
   if (url.pathname == '/') {
-    const button = h('button', 'Push me')
-
     const app =  h('html', null,
       h('head', null,
         h('title', null, 'Everett Bogue | Website'),
