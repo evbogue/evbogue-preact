@@ -30,27 +30,43 @@ serve((req, conn) => {
         h('button', {id: 'about'}, 'About me'),
         h('div', {id: 'aboutDiv'}),
         h('br'), 
-        h('button', {id: 'contact'}, 'Contact me'),
+        h('button', {id: 'contact'}, 'Email me'),
         h('div', {id: 'contactDiv'}),
+        h('br'), 
+        h('button', {id: 'text'}, 'Text me'),
+        h('div', {id: 'textDiv'}),
         h('script', {src: 'app.js', type: 'module'})
       )
     )
 
     return new Response(render(app), {headers: {"Content-Type" : "text/html"}})
-  } else if (url.pathname == '/contact') {
+  } if (url.pathname == '/contact') {
     fetch('https://ntfy.sh/evbogue', {
       method: 'POST',
       body: 'Contact from ' + ip
     })
     const contact = h('a', {href: 'mailto:ev@evbogue.com'}, 'ev@evbogue.com')
     return new Response(render(contact), {headers: {"Content-Type" : "text/html"}})
-  } else if (url.pathname == '/about') {
+  } if (url.pathname == '/about') {
     fetch('https://ntfy.sh/evbogue', {
       method: 'POST',
       body: 'About from ' + ip
     })
     const about = h('p', null, bio)
     return new Response(render(about), {headers: {"Content-Type": "text/html"}})
+  } if (url.pathname == '/text') {
+    fetch('https://ntfy.sh/evbogue', {
+      method: 'POST',
+      body: 'Text from ' + ip
+    })
+    const text = h('div', null,
+      h('input', {id: 'contactinfo', placeholder: 'Your contact info'}),
+      h('br'),
+      h('textarea', {id: 'textarea', placeholder: 'Write a message'}),
+      h('br'),
+      h('button', {id: 'send'}, 'Send')
+    )
+    return new Response(render(text), {headers: {"Content-Type": "text/html"}}) 
   } else {
     return serveDir(req, {fsRoot: '', showDirListing: true, quiet: true})
   }
