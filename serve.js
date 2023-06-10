@@ -7,12 +7,15 @@ const bio = `
 Hi, I'm Everett Bogue.  I've been coding JavaScript since 1999.
 `
 
-serve((req) => {
+serve((req, conn) => {
   const url = new URL(req.url)
+  const ip = conn.remoteAddr.hostname
+  //const ip = addr.hostname
+  //console.log(ip)
   if (url.pathname == '/') {
     fetch('https://ntfy.sh/evbogue', {
       method: 'POST',
-      body: 'Visit'
+      body: 'Visit from ' + ip
     })
     const app =  h('html', null,
       h('head', null,
@@ -35,7 +38,7 @@ serve((req) => {
   } if (url.pathname == '/contact') {
     fetch('https://ntfy.sh/evbogue', {
       method: 'POST',
-      body: 'Contact'
+      body: 'Contact from ' + ip
     })
     const contact = h('a', {href: 'mailto:ev@evbogue.com'}, 'ev@evbogue.com')
     return new Response(render(contact), {headers: {"Content-Type" : "text/html"}})
