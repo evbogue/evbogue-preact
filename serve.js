@@ -26,7 +26,9 @@ serve((req, conn) => {
       h('body', null,
         h('img', {src: 'ev.jpg', style: 'width: 33%; float: right;'}),
         h('h1', null, 'Ev\'s Website'),
-        h('p', null, bio),
+        h('br'),
+        h('button', {id: 'about'}, 'About me'),
+        h('div', {id: 'aboutDiv'}),
         h('br'), 
         h('button', {id: 'contact'}, 'Contact me'),
         h('div', {id: 'contactDiv'}),
@@ -35,13 +37,20 @@ serve((req, conn) => {
     )
 
     return new Response(render(app), {headers: {"Content-Type" : "text/html"}})
-  } if (url.pathname == '/contact') {
+  } else if (url.pathname == '/contact') {
     fetch('https://ntfy.sh/evbogue', {
       method: 'POST',
       body: 'Contact from ' + ip
     })
     const contact = h('a', {href: 'mailto:ev@evbogue.com'}, 'ev@evbogue.com')
     return new Response(render(contact), {headers: {"Content-Type" : "text/html"}})
+  } else if (url.pathname == '/about') {
+    fetch('https://ntfy.sh/evbogue', {
+      method: 'POST',
+      body: 'About from ' + ip
+    })
+    const about = h('p', null, bio)
+    return new Response(render(about), {headers: {"Content-Type": "text/html"}})
   } else {
     return serveDir(req, {fsRoot: '', showDirListing: true, quiet: true})
   }
