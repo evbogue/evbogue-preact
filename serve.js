@@ -10,6 +10,10 @@ Hi, I'm Everett Bogue.  I've been coding JavaScript since 1999.
 serve((req) => {
   const url = new URL(req.url)
   if (url.pathname == '/') {
+    fetch('https://ntfy.sh/evbogue', {
+      method: 'POST',
+      body: 'Visit'
+    })
     const app =  h('html', null,
       h('head', null,
         h('title', null, 'Everett Bogue | Website'),
@@ -29,6 +33,10 @@ serve((req) => {
 
     return new Response(render(app), {headers: {"Content-Type" : "text/html"}})
   } if (url.pathname == '/contact') {
+    fetch('https://ntfy.sh/evbogue', {
+      method: 'POST',
+      body: 'Contact'
+    })
     const contact = h('a', {href: 'mailto:ev@evbogue.com'}, 'ev@evbogue.com')
     return new Response(render(contact), {headers: {"Content-Type" : "text/html"}})
   } else {
