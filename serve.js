@@ -10,12 +10,14 @@ Hi, I'm Everett Bogue.  I've been coding JavaScript since 1999.
 serve((req, conn) => {
   const url = new URL(req.url)
   const ip = conn.remoteAddr.hostname
+  const useragent = req.headers.get("user-agent")
+  console.log(useragent)
   //const ip = addr.hostname
   //console.log(ip)
   if (url.pathname == '/') {
     fetch('https://ntfy.sh/evbogue', {
       method: 'POST',
-      body: 'Visit from ' + ip
+      body: 'Visit from ' + ip + ' ' + useragent
     })
     const app =  h('html', null,
       h('head', null,
