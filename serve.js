@@ -7,18 +7,31 @@ const bio = `
 Hi, I'm Everett Bogue.  I've been coding JavaScript since 1999.
 `
 
+const blocklist = ['NetNewsWire', 'Sogou']
+
+function checker (string, list) {
+  let check = false
+  list.forEach(word => {
+    if (string.includes(word)) {
+      check = true
+    }
+  })
+  return check
+}
+
 serve((req, conn) => {
   const url = new URL(req.url)
   const ip = conn.remoteAddr.hostname
   const useragent = req.headers.get("user-agent")
-  console.log(useragent)
-  //const ip = addr.hostname
-  //console.log(ip)
+  const check = checker(useragent, blocklist)
+
   if (url.pathname == '/') {
-    fetch('https://ntfy.sh/evbogue', {
-      method: 'POST',
-      body: 'Visit from ' + ip + ' ' + useragent
-    })
+    if (!check) { 
+      fetch('https://ntfy.sh/evbogue', {
+        method: 'POST',
+        body: 'Visit from ' + ip + ' ' + useragent
+      })
+    }
     const app =  h('html', null,
       h('head', null,
         h('title', null, 'Everett Bogue | Website'),
