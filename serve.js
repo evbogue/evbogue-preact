@@ -4,7 +4,7 @@ import { h } from 'https://esm.sh/preact'
 import { render } from 'https://esm.sh/preact-render-to-string'
 
 const bio = `
-Hi, I'm Everett Bogue.  I've been coding JavaScript since 1999.
+Hi, I'm Everett Bogue.  I've been coding JavaScript since 1999. Follow me on 
 `
 
 const blocklist = ['NetNewsWire', 'Sogou']
@@ -42,7 +42,7 @@ serve((req, conn) => {
         h('img', {src: 'ev.jpg', style: 'width: 33%; float: right;'}),
         h('h1', null, 'Ev\'s Website'),
         h('br'),
-        h('button', {id: 'about'}, 'About me'),
+        h('button', {id: 'about'}, 'About me [New!]'),
         h('div', {id: 'aboutDiv'}),
         h('br'), 
         h('button', {id: 'contact'}, 'Email me'),
@@ -67,7 +67,7 @@ serve((req, conn) => {
       method: 'POST',
       body: 'About from ' + ip
     })
-    const about = h('p', null, bio)
+    const about = h('p', null, bio, h('a', {href: 'https://www.threads.net/@everettbogue'}, 'Threads'))
     return new Response(render(about), {headers: {"Content-Type": "text/html"}})
   } if (url.pathname == '/text') {
     fetch('https://ntfy.sh/evbogue', {
