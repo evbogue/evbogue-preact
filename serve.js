@@ -41,7 +41,7 @@ serve((req, conn) => {
       h('body', null,
         h('img', {src: 'ev.jpg', style: 'width: 33%; float: right;'}),
         h('h1', null, 'Ev\'s Website'),
-        h('p', null, '7/31/23 | And how are you today? Please text you answer, below.'),
+        h('p', null, '7/31/23 | And how are you today? Please text your answer, below.'),
         h('br'),
         h('button', {id: 'about'}, 'About me [New!]'),
         h('div', {id: 'aboutDiv'}),
