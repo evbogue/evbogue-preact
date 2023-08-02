@@ -41,7 +41,7 @@ serve((req, conn) => {
       h('body', null,
         h('img', {src: 'ev.jpg', style: 'width: 33%; float: right;'}),
         h('h1', null, 'Ev\'s Website'),
-        h('p', null, '8/2/23 open call: ', h('a', {href: 'https://meet.jit.si/ajitsimeetingjustforus'}, 'https://meet.jit.si/ajitsimeetingjustforus')),
+        h('p', null, '8/2/23 | worked on a deno chat app, but it\'s kind of half done.'),
         h('br'),
         h('button', {id: 'about'}, 'About me [New!]'),
         h('div', {id: 'aboutDiv'}),
